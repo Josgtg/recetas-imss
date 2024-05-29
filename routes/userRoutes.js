@@ -4,6 +4,7 @@ const router = express.Router()
 const {
     getAllUsers,
     getOneUser,
+    getUserByCurp,
     registerUser,
     loginUser,
     getCurrentUser,
@@ -21,6 +22,10 @@ router.route("/login")
 
 router.route("/current")
     .get(getCurrentUser)
+    .all(notAllowed)
+
+router.route("/curp/:curp")
+    .get(getUserByCurp)
     .all(notAllowed)
 
 router.route("/:id")

@@ -62,34 +62,35 @@ El api se compone de las siguientes url:
 ### Métodos y subrutas para /api/usuarios
 
 - (Admin) GET /<br>Regresa una lista de todos los usuarios registrados.
-- (Público) GET /id<br>Regresa al usuario con el id especificado de existir en la base de datos.
+- (Público) GET /*id*<br>Regresa al usuario con el id especificado de existir en la base de datos.
+- (Público) GET /curp/*curp*<br>Regresa al usuario que tenga la curp especificada.
 - (Público) POST /signup<br>Permite registrar a un usuario y registra una cookie con la sesión.<br>
 Para registrar un usuario se necesitan los campos: curp, name, password y kind.
 - (Público) POST /login<br>Registra una cookie con la sesión si los datos de inicio de sesión son correctos.<br>
 Estos datos deben de ser: curp y password.
-- (Público) PUT /id<br>Permite actualizar los datos del usuario con el id especificado.
-- (Público) DELETE /id<br>Permite eliminar al usuario con el id especificado.
+- (Público) PUT /*id*<br>Permite actualizar los datos del usuario con el id especificado.
+- (Público) DELETE /*id*<br>Permite eliminar al usuario con el id especificado.
 
 Los métodos PUT y DELETE sólo funcionan si el usuario a actualizar o eliminar es el mismo que el de la sesión activa, a menos de que quien haga la petición sea un administrador.
 
 ### Métodos y subrutas para /api/recetas
 
-- (Admin) GET /, GET /id<br>Regresa todas las recetas.
-- (Doctor) GET /, GET /id<br>Regresa todas las recetas que haya hecho ese doctor.
-- (Paciente) GET /, GET /id<br>Regresa las recetas de ese paciente.
+- (Admin) GET /, GET /*id*<br>Regresa todas las recetas.
+- (Doctor) GET /, GET /*id*<br>Regresa todas las recetas que haya hecho ese doctor.
+- (Paciente) GET /, GET /*id*<br>Regresa las recetas de ese paciente.
 - (Doctor) POST /<br>Permite subir una receta.<br>
 Para subir una receta son necesarios los campos: patient (La curp del usuario para el que se está escribiendo la receta), residence y medicine (Una lista con el id de las medicinas de la receta)
-- (Doctor) PUT /id<br>Permite actualizar la receta con el id especificado.
-- (Doctor) DELETE /id<br>Permite eliminar la receta con el id especificado.
+- (Doctor) PUT /*id*<br>Permite actualizar la receta con el id especificado.
+- (Doctor) DELETE /*id*<br>Permite eliminar la receta con el id especificado.
 
 ### Métodos y subrutas para /api/medicinas
 
 - (Público) GET /<br>Regresa una lista con todas las recetas.
-- (Público) GET /id<br>Regresa el medicamento con el id especificado.
+- (Público) GET /*id*<br>Regresa el medicamento con el id especificado.
 - (Admin) POST /<br>Permite subir una medicina.<br>
 Para subir una medicina son necesarios los campos: name y description.
-- (Admin) PUT /<br>Permite actualizar los datos de la medicina con el id especificado.
-- (Admin) DELETE /<br>Permite eliminar la medicina con el id especificado.
+- (Admin) PUT /*id*<br>Permite actualizar los datos de la medicina con el id especificado.
+- (Admin) DELETE /*id*<br>Permite eliminar la medicina con el id especificado.
 
 
 ## Ejemplo de cómo subir un usuario a la base de datos:

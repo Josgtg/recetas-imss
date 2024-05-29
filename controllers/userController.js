@@ -1,12 +1,13 @@
 const asyncHandler = require("express-async-handler")
 const User = require("../models/userModel")
 const bcrypt = require("bcrypt")
+const constants = require("../constants")
 
 // GET /
 const getAllUsers = asyncHandler( async (req, res) => {
-    if (!req.session) {
+    if (!req.session.loggedIn) {
         res.status(403)
-        throw new Error("No tienes permiso para efectuar esta acción")
+        throw new Error("Necesitas iniciar sesión")
     }
 
     if (req.session.kind != constants.ADMIN) {
@@ -26,17 +27,58 @@ const getAllUsers = asyncHandler( async (req, res) => {
 
 // GET /:id
 const getOneUser = asyncHandler( async (req, res) => {
-    if (!req.session) {
+    if (!req.session.loggedIn) {
         res.status(403)
-        throw new Error("No tienes permiso para efectuar esta acción")
+        throw new Error("Necesitas iniciar sesión")
     }
 
-    if (req.session.kind != constants.ADMIN) {
-        res.status(403)
-        throw new Error("No tienes acceso a este método")
+    if (req.session.kind == constants.PATIENT) {
+        if (req.session.id != req.params.id) {
+            res.status(403)
+            throw new Error("No tienes acceso a este método")
+        }
     }
 
-    let user = await User.findOne({ _id: req.params.id }, {
+    try {
+        var user = await User.findOne({ _id: req.params.id }, {
+            _id: 1,
+            curp: 1,
+            name: 1,
+            kind: 1
+        })
+    } catch (err) {
+        res.status(400)
+        throw new Error("El id especificado es inválido")
+    }
+
+    if (!user) {
+        res.status(404)
+        throw new Error("No se ha encontrado a ese usuario")
+    }
+
+    res.status(200).json({
+        id: user._id,
+        curp: user.curp,
+        name: user.name,
+        kind: user.kind
+    })
+})
+
+// GET /curp/:curp
+const getUserByCurp = asyncHandler( async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.status(403)
+        throw new Error("Necesitas iniciar sesión")
+    }
+
+    if (req.session.kind == constants.PATIENT) {
+        if (req.session.curp != req.params.curp) {
+            res.status(403)
+            throw new Error("No tienes acceso a este método")
+        }
+    }
+
+    let user = await User.findOne({ curp: req.params.curp }, {
         _id: 1,
         curp: 1,
         name: 1,
@@ -48,7 +90,12 @@ const getOneUser = asyncHandler( async (req, res) => {
         throw new Error("No se ha encontrado a ese usuario")
     }
 
-    res.status(200).json(user)
+    res.status(200).json({
+        id: user._id,
+        curp: user.curp,
+        name: user.name,
+        kind: user.kind
+    })
 })
 
 
@@ -70,10 +117,12 @@ const registerUser = asyncHandler( async (req, res) => {
     let user = await User.create({
         curp, password: hashedPassword, name, kind
     })
-    
+
+    console.log(user._id)
+
     if (user) {
         req.session.loggedIn = true
-        req.session.id = user._id
+        req.session.user_id = user._id
         req.session.curp = user.curp
         req.session.name = user.name
         req.session.kind = user.kind
@@ -105,7 +154,7 @@ const loginUser = asyncHandler( async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
         req.session.loggedIn = true
-        req.session.id = user._id
+        req.session.user_id = user._id
         req.session.curp = user.curp
         req.session.name = user.name
         req.session.kind = user.kind
@@ -124,13 +173,13 @@ const loginUser = asyncHandler( async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler( async (req, res) => {
-    if (!req.session) {
+    if (!req.session.loggedIn) {
         res.status(400)
-        throw new Error("Necesitas iniciar sesión primero")
+        throw new Error("Necesitas iniciar sesión")
     }
     
     res.status(200).json({
-        id: req.session.id,
+        id: req.session.user_id,
         curp: req.session.curp,
         name: req.session.name,
         kind: req.session.kind
@@ -139,9 +188,9 @@ const getCurrentUser = asyncHandler( async (req, res) => {
 
 // DELETE /:id
 const deleteUser = asyncHandler( async (req, res) => {
-    if (!req.session) {
+    if (!req.session.loggedIn) {
         res.status(403)
-        throw new Error("No tienes permiso para efectuar esta acción")
+        throw new Error("Necesitas iniciar sesión")
     }
 
     if (req.session.id != req.params.id || req.session.kind != constants.ADMIN) {
@@ -174,6 +223,7 @@ const notAllowed = asyncHandler( async (req, res) => {
 module.exports = {
     getAllUsers,
     getOneUser,
+    getUserByCurp,
     registerUser,
     loginUser,
     getCurrentUser,
