@@ -2,16 +2,19 @@ const mongoose = require("mongoose")
 
 const prescriptionSchema = mongoose.Schema(
     {
-        medic_id: {
+        doctor: {
             // Médico del usuario al que pertenece la receta
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "User"
         },
-        user_id: {
-            // Usuario al que pertenece la receta
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
+        patient: {
+            // Curp del usuario al que pertenece la receta
+            type: String,
+            required: [
+                true,
+                "Es necesario saber para quién va dirigida esta receta"
+            ],
             ref: "User"
         },
         domicile: {
