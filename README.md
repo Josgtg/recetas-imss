@@ -30,7 +30,7 @@ Necesitarás tener la herramienta Git en tu computadora para seguir este proceso
 
 ```npm install```
 
-5. Necesitas crear un archivo con el nombre *.env* dentro de la carpeta principal. Dentro de este archivo debe venir la siguiente estructura:
+5. Necesitas crear un archivo con el nombre *.env (Importante notar que es sólo la extensión, sin nombre de archivo)* dentro de la carpeta principal. Dentro de este archivo debe venir la siguiente estructura:
 
 PORT = *Número de puerto al que va a escuchar la aplicación*
 
@@ -59,10 +59,13 @@ El api se compone de las siguientes url:
 - /api/recetas
 - /api/medicinas
 
+ejemplo: htt<span>p://localhost</span>:9000/api/usuarios
+
 ### Métodos y subrutas para /api/usuarios
 
 - (Admin) GET /<br>Regresa una lista de todos los usuarios registrados.
 - (Público) GET /*id*<br>Regresa al usuario con el id especificado de existir en la base de datos.
+- (Público) GET /current<br>Regresa el usuario actual.
 - (Público) GET /curp/*curp*<br>Regresa al usuario que tenga la curp especificada.
 - (Público) POST /signup<br>Permite registrar a un usuario y registra una cookie con la sesión.<br>
 Para registrar un usuario se necesitan los campos: curp, name, password y kind.
