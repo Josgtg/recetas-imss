@@ -22,7 +22,14 @@ const getAllUsers = asyncHandler( async (req, res) => {
         kind: 1
     })
 
-    res.status(200).json(users)
+    userList = JSON.parse(JSON.stringify(users))
+
+    userList.forEach(u => {
+        u["id"] = u["_id"]
+        delete u["_id"]
+    });
+
+    res.status(200).json(userList)
 })
 
 // GET /:id
@@ -118,8 +125,6 @@ const registerUser = asyncHandler( async (req, res) => {
         curp, password: hashedPassword, name, kind
     })
 
-    console.log(user._id)
-
     if (user) {
         req.session.loggedIn = true
         req.session.user_id = user._id
@@ -158,7 +163,6 @@ const loginUser = asyncHandler( async (req, res) => {
         req.session.curp = user.curp
         req.session.name = user.name
         req.session.kind = user.kind
-        console.log(req.session)
         res.status(200).json({
             id: user._id,
             curp: user.curp,
