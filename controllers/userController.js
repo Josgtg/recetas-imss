@@ -131,7 +131,6 @@ const registerUser = asyncHandler( async (req, res) => {
         req.session.curp = user.curp
         req.session.name = user.name
         req.session.kind = user.kind
-        console.log(req.session)
         res.status(200).json({
             id: user._id,
             curp: user.curp,
