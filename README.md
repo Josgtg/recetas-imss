@@ -24,9 +24,7 @@ Necesitarás tener la herramienta Git en tu computadora para seguir este proceso
 
 3. Para descargar los archivos del repositorio:
 
-```git branch --set-upstream-to=origin/main main```
-
-```git pull```
+```git pull origin main```
 
 4. Ya debes ser capaz de instalar las dependencias necesarias:
 
