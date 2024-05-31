@@ -30,13 +30,13 @@ Necesitarás tener la herramienta Git en tu computadora para seguir este proceso
 
 ```npm install```
 
-5. Necesitas crear un archivo con el nombre *.env* dentro de la carpeta principal con la siguiente estructura:
+5. Necesitas crear un archivo con el nombre *.env* dentro de la carpeta principal. Dentro de este archivo debe venir la siguiente estructura:
 
 PORT = *Número de puerto al que va a escuchar la aplicación*
 
-CONNECTION_STRING = *Link a tu base de datos de MongoDB*
+CONNECTION_STRING = *Link a tu base de datos de MongoDB (Entre comillas)*
 
-SECRET = *Palabra o frase de tu preferencia. Es una clave necesaria para la funcionalidad de las cookies*
+SECRET = *Palabra o frase de tu preferencia. Es una clave necesaria para la funcionalidad de las cookies (Entre comillas)*
 
 6. Habiendo hecho lo anterior, deberías poder iniciar la aplicación:
 
