@@ -84,6 +84,7 @@ Los métodos PUT y DELETE sólo funcionan si el usuario a actualizar o eliminar 
 - (Doctor) POST /<br>Permite subir una receta.<br>
 Para subir una receta son necesarios los campos: patient (La curp del usuario para el que se está escribiendo la receta), residence y medicine (Una lista con el id de las medicinas de la receta)
 - (Doctor) PUT /*id*<br>Permite actualizar la receta con el id especificado.
+- (Público) PATCH /*id*<br>Permite actualizar el estado de la receta. El único campo necesario es: state.
 - (Doctor) DELETE /*id*<br>Permite eliminar la receta con el id especificado.
 
 ### Métodos y subrutas para /api/medicinas
