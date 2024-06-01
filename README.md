@@ -44,7 +44,7 @@ SECRET = *Palabra o frase de tu preferencia. Es una clave necesaria para la func
 
 o
 
-```npm run```
+```npm start```
 
 Si el comando se ha ejecutado de forma exitosa, podrás ver la aplicación en ejecución en la dirección<br>htt<span>p://localhost:</span>*El puerto que escribiste en tu archivo.env*<br>
 *htt<span>p://localhost:</span>9030, por ejemplo.*
