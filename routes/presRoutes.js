@@ -2,34 +2,25 @@ const express = require("express")
 const router = express.Router()
 
 const {
-    getAllUsers,
-    getOneUser,
-    registerUser,
-    loginUser,
-    getCurrentUser,
-    deleteUser,
+    getAllPres,
+    getOnePres,
+    addPres,
+    updatePres,
+    deletePres,
     notAllowed
-} = require("../controllers/userController")
+} = require("../controllers/presController")
 
-router.route("/signup")
-    .post(registerUser)
-    .all(notAllowed)
+router.use(require("../middleware/checkSession"))
 
-router.route("/login")
-    .post(loginUser)
-    .all(notAllowed)
-
-router.route("/current")
-    .get(getCurrentUser)
+router.route("/")
+    .get(getAllPres)
+    .post(addPres)
     .all(notAllowed)
 
 router.route("/:id")
-    .get(getOneUser)
-    .delete(deleteUser)
-    .all(notAllowed)
-
-router.route("/")
-    .get(getAllUsers)
+    .get(getOnePres)
+    .put(updatePres)
+    .delete(deletePres)
     .all(notAllowed)
 
 router.all("*", (req, res) => {
