@@ -2,34 +2,30 @@ const express = require("express")
 const router = express.Router()
 
 const {
-    getAllUsers,
-    getOneUser,
-    registerUser,
-    loginUser,
-    getCurrentUser,
-    deleteUser,
+    getAllMedicine,
+    getOneMedicine,
+    getMedicineByClave,
+    addMedicine,
+    updateMedicine,
+    deleteMedicine,
     notAllowed
-} = require("../controllers/userController")
+} = require("../controllers/medsController")
 
-router.route("/signup")
-    .post(registerUser)
+router.use(require("../middleware/checkSession"))
+
+router.route("/")
+    .get(getAllMedicine)
+    .post(addMedicine)
     .all(notAllowed)
 
-router.route("/login")
-    .post(loginUser)
-    .all(notAllowed)
-
-router.route("/current")
-    .get(getCurrentUser)
+router.route("/clave/:clave")
+    .get(getMedicineByClave)
     .all(notAllowed)
 
 router.route("/:id")
-    .get(getOneUser)
-    .delete(deleteUser)
-    .all(notAllowed)
-
-router.route("/")
-    .get(getAllUsers)
+    .get(getOneMedicine)
+    .put(updateMedicine)
+    .delete(deleteMedicine)
     .all(notAllowed)
 
 router.all("*", (req, res) => {
