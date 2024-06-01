@@ -2,10 +2,17 @@ const mongoose = require("mongoose")
 
 const medicineSchema = mongoose.Schema(
     {
-        /*
-        La clave no está incluida debido a que asumo que es lo mismo que el
-        id que mongo asigna automáticamente
-        */
+        clave: {
+            type: String,
+            required: [
+                true,
+                "La medicina necesita una clave que la identifique"
+            ],
+            unique: [
+                true,
+                "Ya existe una medicina con esa clave"
+            ]
+        },
         name: {
             type: String,
             required: [
