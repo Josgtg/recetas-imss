@@ -26,9 +26,9 @@ const getOneMedicine = asyncHandler( async (req, res) => {
     try {
         var medicine = await Med.findOne({ _id: req.params.id }, {
             _id: 1,
-            curp: 1,
+            clave: 1,
             name: 1,
-            kind: 1
+            description: 1
         })
     } catch (err) {
         res.status(400)
