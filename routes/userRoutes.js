@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const checkSession = require("../middleware/checkSession")
 
 const {
     getAllUsers,
@@ -21,20 +22,20 @@ router.route("/login")
     .all(notAllowed)
 
 router.route("/current")
-    .get(getCurrentUser)
+    .get(checkSession, getCurrentUser)
     .all(notAllowed)
 
 router.route("/curp/:curp")
-    .get(getUserByCurp)
+    .get(checkSession, getUserByCurp)
     .all(notAllowed)
 
 router.route("/:id")
-    .get(getOneUser)
-    .delete(deleteUser)
+    .get(checkSession, getOneUser)
+    .delete(checkSession, deleteUser)
     .all(notAllowed)
 
 router.route("/")
-    .get(getAllUsers)
+    .get(checkSession, getAllUsers)
     .all(notAllowed)
 
 router.all("*", (req, res) => {

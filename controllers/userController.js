@@ -5,11 +5,6 @@ const constants = require("../constants")
 
 // GET /
 const getAllUsers = asyncHandler( async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.status(403)
-        throw new Error("Necesitas iniciar sesión")
-    }
-
     if (req.session.kind != constants.ADMIN) {
         res.status(403)
         throw new Error("No tienes acceso a este método")
@@ -34,11 +29,6 @@ const getAllUsers = asyncHandler( async (req, res) => {
 
 // GET /:id
 const getOneUser = asyncHandler( async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.status(403)
-        throw new Error("Necesitas iniciar sesión")
-    }
-
     if (req.session.kind == constants.PATIENT) {
         if (req.session.id != req.params.id) {
             res.status(403)
@@ -73,11 +63,6 @@ const getOneUser = asyncHandler( async (req, res) => {
 
 // GET /curp/:curp
 const getUserByCurp = asyncHandler( async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.status(403)
-        throw new Error("Necesitas iniciar sesión")
-    }
-
     if (req.session.kind == constants.PATIENT) {
         if (req.session.curp != req.params.curp) {
             res.status(403)
@@ -176,11 +161,6 @@ const loginUser = asyncHandler( async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler( async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.status(400)
-        throw new Error("Necesitas iniciar sesión")
-    }
-    
     res.status(200).json({
         id: req.session.user_id,
         curp: req.session.curp,
@@ -191,11 +171,6 @@ const getCurrentUser = asyncHandler( async (req, res) => {
 
 // DELETE /:id
 const deleteUser = asyncHandler( async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.status(403)
-        throw new Error("Necesitas iniciar sesión")
-    }
-
     if (req.session.id != req.params.id || req.session.kind != constants.ADMIN) {
         res.status(403)
         throw new Error("No tienes acceso a este método")
