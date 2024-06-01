@@ -90,11 +90,11 @@ Para subir una receta son necesarios los campos: patient (La curp del usuario pa
 
 - (Público) GET /<br>Regresa una lista con todas las recetas.
 - (Público) GET /*id*<br>Regresa el medicamento con el id especificado.
+- (Público) GET /clave/*clave*<br>Regresa el medicamento con la clave especificada.
 - (Admin) POST /<br>Permite subir una medicina.<br>
-Para subir una medicina son necesarios los campos: name y description.
+Para subir una medicina son necesarios los campos: clave, name y description.
 - (Admin) PUT /*id*<br>Permite actualizar los datos de la medicina con el id especificado.
 - (Admin) DELETE /*id*<br>Permite eliminar la medicina con el id especificado.
-
 
 ## Ejemplo de cómo subir un usuario a la base de datos:
 Ya sea desde el frontend, o directamente a la api, el proceso es parecido para las otras url.
