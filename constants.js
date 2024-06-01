@@ -14,8 +14,8 @@ module.exports =
         PATIENT: "paciente",
 
         // Estados de la receta
-        REQUESTED: "Solicitada",
-        PROCESSING: "En proceso",
-        SENT: "Enviada",
-        DELIVERED: "Surtida",
+        REQUESTED: "solicitada",
+        PROCESSING: "en proceso",
+        SENT: "enviada",
+        DELIVERED: "surtida",
     }

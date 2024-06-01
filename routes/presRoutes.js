@@ -5,6 +5,7 @@ const {
     getAllPres,
     getOnePres,
     addPres,
+    changeStatus,
     updatePres,
     deletePres,
     notAllowed
@@ -20,6 +21,7 @@ router.route("/")
 router.route("/:id")
     .get(getOnePres)
     .put(updatePres)
+    .patch(changeStatus)
     .delete(deletePres)
     .all(notAllowed)
 

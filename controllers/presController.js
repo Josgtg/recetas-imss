@@ -158,6 +158,66 @@ const updatePres = asyncHandler( async (req, res) => {
     }
 })
 
+// PATCH /:id
+const changeStatus = asyncHandler( async (req, res) => {
+
+    let { state } = req.body
+
+    if (!state) {
+        res.status(400)
+        throw new Error("No se encontró el nuevo estado de la receta")
+    }
+
+    let pres = Pres.findById(req.params.id)
+
+    if (!pres) {
+        res.status(404)
+        throw new Error("No se ha encontrado la receta")
+    }
+
+    if (state == constants.DELIVERED && req.session.kind != constants.PATIENT) {
+        res.status(403)
+        throw new Error("No tienes permiso para marcar esta receta como surtida")
+    }
+
+    if (
+        state != constants.REQUESTED &&
+        state != constants.PROCESSING &&
+        state != constants.SENT &&
+        state != constants.DELIVERED
+    ) {
+        res.status(400)
+        throw new Error("El estado de la receta está en un formato inválido")
+    }
+
+    let updatedPres = await Pres.findByIdAndUpdate(
+        req.params.id,
+        {
+            state: state
+        },
+        {
+            new: true
+        }
+    )
+
+    if (updatedPres) {
+        res.json({
+            id: updatedPres._id,
+            doctor: updatedPres.doctor,
+            patient: updatedPres.patient,
+            domicile: updatedPres.domicile,
+            medicine: updatedPres.medicine,
+            state: updatedPres.state
+        })
+    } else {
+        res.status(400)
+        throw new Error(
+            "No se pudo actualizar el estado de la receta. Revisa que los datos sean correctos"
+        )
+    }
+})
+
+
 // DELETE /id
 const deletePres = asyncHandler( async (req, res) => {
     let pres = await Pres.findById(req.params.id)
@@ -207,6 +267,7 @@ module.exports = {
     getAllPres,
     getOnePres,
     addPres,
+    changeStatus,
     updatePres,
     deletePres,
     notAllowed
