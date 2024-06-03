@@ -10,7 +10,7 @@ Este es el proyecto final de la materia *Introducción al Desarrollo de Aplicaci
 
 ## Para ejecutarlo localmente:
 
-Necesitarás tener la herramienta Git en tu computadora para seguir este proceso.
+Necesitarás tener la herramienta Git en tu computadora para seguir este proceso. La puedes descargar en https://git-scm.com
 
 1. Iniciar un repositorio de git vacío en una carpeta nueva donde se vaya a guardar el proyecto.
 
