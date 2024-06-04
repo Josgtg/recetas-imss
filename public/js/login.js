@@ -5,8 +5,6 @@ function getLoginData() {
 }
 
 async function sendData(user, url) {
-    console.log(user)
-
     let res = await fetch(url, {
         method: "POST",
         headers: { 
