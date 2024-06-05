@@ -2,34 +2,42 @@ const asyncHandler = require("express-async-handler")
 const Med = require("../models/medsModel")
 const constants = require("../constants")
 
-// GET /
-const getAllMedicine = asyncHandler( async (req, res) => {
-    let medicine = await Med.find({}, {
-        _id: 1,
-        clave: 1,
-        name: 1,
-        description: 1
+const returnMed = (res, med) => {
+    res.status(200).json({
+        id: med._id,
+        clave: med.clave,
+        name: med.name,
+        description: med.description
     })
+}
 
-    medList = JSON.parse(JSON.stringify(medicine))
+const changeAttrName = (oldName, newName, obj) => {
+    newObj = JSON.parse(JSON.stringify(obj))
 
-    medList.forEach(u => {
-        u["id"] = u["_id"]
-        delete u["_id"]
+    newObj.forEach(u => {
+        u[newName] = u[oldName]
+        delete u[oldName]
     });
 
-    res.status(200).json(medList)
+    return newObj
+}
+
+
+// Funcionalidad de la api
+
+// GET /
+const getAllMedicine = asyncHandler( async (req, res) => {
+    let medicine = await Med.find()
+
+    medicine = changeAttrName("id", "_id", medicine)
+
+    res.status(200).json(medicine)
 })
 
 // GET /:id
 const getOneMedicine = asyncHandler( async (req, res) => {
     try {
-        var medicine = await Med.findOne({ _id: req.params.id }, {
-            _id: 1,
-            clave: 1,
-            name: 1,
-            description: 1
-        })
+        var medicine = await Med.findById(req.params.id)
     } catch (err) {
         res.status(400)
         throw new Error("El id especificado es inválido")
@@ -40,12 +48,7 @@ const getOneMedicine = asyncHandler( async (req, res) => {
         throw new Error("No se ha encontrado esa medicina")
     }
 
-    res.status(200).json({
-        id: medicine._id,
-        clave: medicine.clave,
-        name: medicine.name,
-        description: medicine.description
-    })
+    returnMed(res, medicine)
 })
 
 
@@ -58,18 +61,14 @@ const getMedicineByClave = asyncHandler( async (req, res) => {
         throw new Error("No se ha encontrado esa medicina")
     }
 
-    res.status(200).json({
-        id: medicine._id,
-        clave: medicine.clave,
-        name: medicine.name,
-        description: medicine.description
-    })
+    returnMed(res, medicine)
 })
 
 
 // POST /
 const addMedicine = asyncHandler( async (req, res) => {
     let { clave, name, description } = req.body
+
     if (!clave || !name || !description) {
         res.status(400)
         throw new Error("Se necesitan los campos: clave, name, description")
@@ -85,12 +84,7 @@ const addMedicine = asyncHandler( async (req, res) => {
     })
 
     if (medicine) {
-        res.status(200).json({
-            id: medicine._id,
-            clave: medicine.clave,
-            name: medicine.name,
-            description: medicine.description
-        })
+        returnMed(res, medicine)
     } else {
         res.status(400)
         throw new Error("Hubo un error... Revisa que los datos sean correctos")
@@ -101,6 +95,7 @@ const addMedicine = asyncHandler( async (req, res) => {
 // PUT /id
 const updateMedicine = asyncHandler( async (req, res) => {
     let { clave, name, description } = req.body
+
     if (!clave || !name || !description) {
         res.status(400)
         throw new Error("Se necesitan los campos: clave, name, description")
@@ -113,21 +108,10 @@ const updateMedicine = asyncHandler( async (req, res) => {
         throw new Error("La medicina que estás buscando no existe")
     }
     
-    medicine = await Med.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-            new: true
-        }
-    )
+    medicine = await Med.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
     if (medicine) {
-        res.status(200).json({
-            id: medicine._id,
-            clave: medicine.clave,
-            name: medicine.name,
-            description: medicine.description
-        })
+        returnMed(res, medicine)
     } else {
         res.status(400)
         throw new Error("Hubo un error... Revisa que los datos sean correctos")
@@ -151,12 +135,7 @@ const deleteMedicine = asyncHandler( async (req, res) => {
     medicine = await Med.findByIdAndDelete(req.params.id)
 
     if (medicine) {
-        res.status(200).json({
-            id: medicine._id,
-            clave: medicine.clave,
-            name: medicine.name,
-            description: medicine.description
-        })
+        returnMedicine(res, medicine)
     } else {
         res.status(400)
         throw new Error("No fue posible eliminar el medicamento")

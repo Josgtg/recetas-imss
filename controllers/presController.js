@@ -2,6 +2,33 @@ const asyncHandler = require("express-async-handler")
 const Pres = require("../models/presModel")
 const constants = require("../constants")
 
+// Funciones de ayuda
+
+const changeAttrName = (oldName, newName, obj) => {
+    newObj = JSON.parse(JSON.stringify(obj))
+
+    newObj.forEach(u => {
+        u[newName] = u[oldName]
+        delete u[oldName]
+    });
+
+    return newObj
+}
+
+const returnPres = (res, pres) => {
+    res.status(200).json({
+        id: pres._id,
+        doctor: pres.doctor,
+        patient: pres.patient,
+        domicile: pres.domicile,
+        medicine: pres.medicine,
+        state: pres.state
+    })
+}
+
+
+// Funcionalidad de la api
+
 // GET /
 const getAllPres = asyncHandler( async (req, res) => {
     let filter;
@@ -17,36 +44,17 @@ const getAllPres = asyncHandler( async (req, res) => {
             break
     }
 
-    let pres = await Pres.find(filter, {
-        _id: 1,
-        doctor: 1,
-        patient: 1,
-        domicile: 1,
-        medicine: 1,
-        state: 1
-    })
+    let pres = await Pres.find(filter)
 
-    presList = JSON.parse(JSON.stringify(pres))
+    pres = changeAttrName("_id", "id", pres)
 
-    presList.forEach(u => {
-        u["id"] = u["_id"]
-        delete u["_id"]
-    });
-
-    res.status(200).json(presList)
+    res.status(200).json(pres)
 })
 
 // GET /:id
 const getOnePres = asyncHandler( async (req, res) => {
     try {
-        var pres = await Pres.findOne({ _id: req.params.id }, {
-            _id: 1,
-            doctor: 1,
-            patient: 1,
-            domicile: 1,
-            medicine: 1,
-            state: 1
-        })
+        var pres = await Pres.findById(req.params.id)
     } catch (err) {
         res.status(400)
         throw new Error("El id especificado es inválido")
@@ -71,14 +79,7 @@ const getOnePres = asyncHandler( async (req, res) => {
         }
     }
 
-    res.status(200).json({
-        id: pres._id,
-        doctor: pres.doctor,
-        patient: pres.patient,
-        domicile: pres.domicile,
-        medicine: pres.medicine,
-        state: pres.state
-    })
+    returnPres(res, pres)
 })
 
 
@@ -90,24 +91,24 @@ const addPres = asyncHandler( async (req, res) => {
     }
 
     let { patient, domicile, medicine } = req.body
+    
     if (!patient || !domicile || !medicine) {
         res.status(400)
         throw new Error("Se necesitan los campos: patient, domicile, medicine")
     }
     
     let pres = await Pres.create({
-        doctor: req.session.user_id, patient, domicile, medicine, state: constants.REQUESTED
+        doctor: req.session.user_id,
+        patient,
+        domicile,
+        medicine,
+        state: constants.REQUESTED
     })
 
+    console.log(pres)
+
     if (pres) {
-        res.status(200).json({
-            id: pres._id,
-            doctor: pres.doctor,
-            patient: pres.patient,
-            domicile: pres.domicile,
-            medicine: pres.medicine,
-            state: pres.state
-        })
+        returnPres(res, pres)
     } else {
         res.status(400)
         throw new Error("Hubo un error... Revisa que los datos sean correctos")
@@ -123,6 +124,7 @@ const updatePres = asyncHandler( async (req, res) => {
     }
 
     let { patient, domicile, medicine } = req.body
+
     if (!patient || !domicile || !medicine) {
         res.status(400)
         throw new Error("Se necesitan los campos: patient, domicile, medicine")
@@ -135,23 +137,10 @@ const updatePres = asyncHandler( async (req, res) => {
         throw new Error("La receta que estás buscando no existe")
     }
     
-    pres = await Pres.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-            new: true
-        }
-    )
+    pres = await Pres.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
     if (pres) {
-        res.status(200).json({
-            id: pres._id,
-            doctor: pres.doctor,
-            patient: pres.patient,
-            domicile: pres.domicile,
-            medicine: pres.medicine,
-            state: pres.state
-        })
+        returnPres(res, pres)
     } else {
         res.status(400)
         throw new Error("Hubo un error... Revisa que los datos sean correctos")
@@ -181,34 +170,21 @@ const changeStatus = asyncHandler( async (req, res) => {
     }
 
     if (
-        state != constants.REQUESTED &&
-        state != constants.PROCESSING &&
-        state != constants.SENT &&
-        state != constants.DELIVERED
+        state == constants.REQUESTED ||
+        state == constants.PROCESSING ||
+        state == constants.SENT ||
+        state == constants.DELIVERED
     ) {
         res.status(400)
         throw new Error("El estado de la receta está en un formato inválido")
     }
 
     let updatedPres = await Pres.findByIdAndUpdate(
-        req.params.id,
-        {
-            state: state
-        },
-        {
-            new: true
-        }
+        req.params.id, { state: state }, { new: true }
     )
 
     if (updatedPres) {
-        res.json({
-            id: updatedPres._id,
-            doctor: updatedPres.doctor,
-            patient: updatedPres.patient,
-            domicile: updatedPres.domicile,
-            medicine: updatedPres.medicine,
-            state: updatedPres.state
-        })
+        returnPres(res, updatedPres)
     } else {
         res.status(400)
         throw new Error(
@@ -244,14 +220,7 @@ const deletePres = asyncHandler( async (req, res) => {
     pres = await Pres.findByIdAndDelete(req.params.id)
 
     if (pres) {
-        res.status(200).json({
-            id: pres._id,
-            doctor: pres.doctor,
-            patient: pres.patient,
-            domicile: pres.domicile,
-            medicine: pres.medicine,
-            state: pres.state
-        })
+        returnPres(res, pres)
     } else {
         res.status(400)
         throw new Error("No fue posible eliminar la receta")
