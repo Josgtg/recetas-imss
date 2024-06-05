@@ -1,11 +1,428 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <p>Yay! Youre logged in as a doctor</p>
-</body>
+<!doctype html>
+<html lang="es" data-bs="dark">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/doctor_style.css">
+    </head>
+
+    <body>
+        <header></header>
+        <main>
+            
+            <h1 class="titulo">¡Bienvenido (Nombre del doctor)!</h1>
+            <div class="buscarPaciente">
+                <form action="" class="mx-5">
+                <div class="mb-4 d-flex justify-content-center"><input type="text" class="form-control form-control-lg" name="Curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" placeholder="Ingrese la CURP del paciente" maxlength="18" required>
+                </div>
+                <div class="d-grid">
+                    <button type="button" class="btn btn-success" onclick="mostrar()">Buscar</button>
+                </div>
+                </form>
+            </div><br><br>
+
+
+            <div class="paciente" id="paciente">
+                <h2 class="titulo">(NOMBRE DEL PACIENTE)</h2><br>
+                <h4>Dirección de entrega</h4>
+                <div class="pedirDatosPaciente">
+
+                <div class="entradaDatos">
+                    <label class="form-label mt-4">Calle y numero:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="entradaDatos">
+                    <label class="form-label mt-4">Colonia:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="entradaDatos">
+                    <label class="form-label mt-4">Ciudad:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="entradaDatos">
+                    <label class="form-label mt-4">Estado:</label>
+                    <select class="form-select">
+                        <option value="no">Seleccione uno...</option>
+                        <option value="AS">Aguascalientes</option>
+                        <option value="BC">Baja California</option>
+                        <option value="BS">Baja California Sur</option>
+                        <option value="CC">Campeche</option>
+                        <option value="CS">Chiapas</option>
+                        <option value="CH">Chihuahua</option>
+                        <option value="DF">Ciudad de México</option>
+                        <option value="CL">Coahuila</option>
+                        <option value="CM">Colima</option>
+                        <option value="DG">Durango</option>
+                        <option value="MC">Estado de México</option>
+                        <option value="GT">Guanajuato</option>
+                        <option value="GR">Guerrero</option>
+                        <option value="HG">Hidalgo</option>
+                        <option value="JC">Jalisco</option>
+                        <option value="MN">Michoacán</option>
+                        <option value="MS">Morelos</option>
+                        <option value="NT">Nayarit</option>
+                        <option value="NL">Nuevo León</option>
+                        <option value="OC">Oaxaca</option>
+                        <option value="PL">Puebla</option>
+                        <option value="QT">Querétaro</option>
+                        <option value="QR">Quintana Roo</option>
+                        <option value="SP">San Luis Potosí</option>
+                        <option value="SL">Sinaloa</option>
+                        <option value="SR">Sonora</option>
+                        <option value="TC">Tabasco</option>
+                        <option value="TS">Tamaulipas</option>
+                        <option value="TL">Tlaxcala</option>
+                        <option value="VZ">Veracruz</option>
+                        <option value="YN">Yucatán</option>
+                        <option value="ZS">Zacatecas</option>
+                    </select>
+                </div>
+                <div class="entradaDatos">
+                    <label class="form-label mt-4">Codigo Postal:</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br><br>
+            <h4>Captura recetas</h4>
+                <div class="medicamento">
+                <h5>Medicamento 1</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento1">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 1</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento1">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad1" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 2</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento2">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad2" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 3</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento3">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad3" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 4</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento4">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad4" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 5</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento5">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad5" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 6</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento6">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad6" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 7</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento7">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad7" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 8</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento8">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad8" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 9</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento9">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad9" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <div class="medicamento">
+                <h5>Medicamento 10</h5>
+                <div class="d-flex">
+                    <select class="form-select" name="medicamento10">
+                        <option>Selecciona el medicamento...</option>
+                        <option value="nolotil">Nolotil</option>
+                        <option value="adiro_100">Adiro 100</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="omeprazol">Omeprazol</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="aspirina">Aspirina</option>
+                        <option value="enalapril">Enalapril</option>
+                        <option value="losartan">Losartan</option>
+                        <option value="metformina">Metformina</option>
+                        <option value="atorvastatina">Atorvastatina</option>
+                        <option value="loratadina">Loratadina</option>
+                        <option value="salbutamol">Salbutamol</option>
+                        <option value="simvastatina">Simvastatina</option>
+                        <option value="ranitidina">Ranitidina</option>
+                        <option value="amlodipino">Amlodipino</option>
+                        <option value="clonazepam">Clonazepam</option>
+                        <option value="diclofenaco">Diclofenaco</option>
+                        <option value="levotiroxina">Levotiroxina</option>
+                        <option value="cetirizina">Cetirizina</option>
+                    </select>
+                    <input type="text" class="form-control" name="cantidad10" min="1" max="99" placeholder="Cant.">
+                </div>
+                </div>
+                <br><br>
+                <div class="d-grid">
+                    <button type="button" class="btn btn-lg btn-info" onclick="exitoso()">Solicitar</button>
+                </div>
+            </div>
+            
+            
+            
+        </main><br><br><br><br><br><br>
+        <footer class="bg-primary mt-5 py-4 text-center text-white fixed-bottom"></footer>
+        <script
+            src="js/bootstrap.bundle.min.js"
+        ></script>
+
+        <script src="js/script.js"></script>
+
+        <script src="js/mostrarPaciente.js"></script>
+    </body>
 </html>
