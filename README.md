@@ -76,17 +76,6 @@ Estos datos deben de ser: curp y password.
 
 Los métodos PUT y DELETE sólo funcionan si el usuario a actualizar o eliminar es el mismo que el de la sesión activa, a menos de que quien haga la petición sea un administrador.
 
-### Métodos y subrutas para /api/recetas
-
-- (Admin) GET /, GET /*id*<br>Regresa todas las recetas.
-- (Doctor) GET /, GET /*id*<br>Regresa todas las recetas que haya hecho ese doctor.
-- (Paciente) GET /, GET /*id*<br>Regresa las recetas de ese paciente.
-- (Doctor) POST /<br>Permite subir una receta.<br>
-Para subir una receta son necesarios los campos: patient (La curp del usuario para el que se está escribiendo la receta), residence y medicine (Una lista con el id de las medicinas de la receta)
-- (Doctor) PUT /*id*<br>Permite actualizar la receta con el id especificado.
-- (Público) PATCH /*id*<br>Permite actualizar el estado de la receta. El único campo necesario es: state.
-- (Doctor) DELETE /*id*<br>Permite eliminar la receta con el id especificado.
-
 ### Métodos y subrutas para /api/medicinas
 
 - (Público) GET /<br>Regresa una lista con todas las recetas.
@@ -96,6 +85,17 @@ Para subir una receta son necesarios los campos: patient (La curp del usuario pa
 Para subir una medicina son necesarios los campos: clave, name y description.
 - (Admin) PUT /*id*<br>Permite actualizar los datos de la medicina con el id especificado.
 - (Admin) DELETE /*id*<br>Permite eliminar la medicina con el id especificado.
+
+### Métodos y subrutas para /api/recetas
+
+- (Admin) GET /, GET /*id*<br>Regresa todas las recetas.
+- (Doctor) GET /, GET /*id*<br>Regresa todas las recetas que haya hecho ese doctor.
+- (Paciente) GET /, GET /*id*<br>Regresa las recetas de ese paciente.
+- (Doctor) POST /<br>Permite subir una receta.<br>
+Para subir una receta son necesarios los campos: patient (La curp del usuario para el que se está escribiendo la receta), residence, medicine (Una lista con el id de las medicinas de la receta) y quantity (Una lista con la cantidad de cada medicamento relacionados por posición)
+- (Doctor) PUT /*id*<br>Permite actualizar la receta con el id especificado.
+- (Público) PATCH /*id*<br>Permite actualizar el estado de la receta. El único campo necesario es: state.
+- (Doctor) DELETE /*id*<br>Permite eliminar la receta con el id especificado.
 
 ## Ejemplo de cómo subir un usuario a la base de datos:
 Ya sea desde el frontend, o directamente a la api, el proceso es parecido para las otras url.
