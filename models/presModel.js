@@ -17,7 +17,7 @@ const prescriptionSchema = mongoose.Schema(
             ],
             ref: "User"
         },
-        domicile: {
+        residence: {
             type: String,
             required: [
                 true,
