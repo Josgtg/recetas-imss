@@ -1,0 +1,16 @@
+.bg{
+    background-image: url(../assets/img/imsslog.jpg);
+    background-position: center center;
+}
+
+.colorLg{
+    background-color: rgb(230, 230, 230);
+}
+.relocate{
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}

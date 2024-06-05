@@ -1,0 +1,26 @@
+.titulo{
+    margin-top: 20px;
+    text-align: center;
+}
+.buscarPaciente{
+    margin-top: 20px;
+    margin-left: 19%;
+    margin-right: 19%;
+}
+.paciente{
+    display: none;
+    margin-top: 20px;
+    margin-left: 19%;
+    margin-right: 19%;
+}
+.pedirDatosPaciente{
+    display: flex;
+}
+.entradaDatos{
+    width: 250px;
+    padding: 30px;
+}
+.medicamento{
+    margin-top: 30px;
+    margin-left: 50px;
+}
