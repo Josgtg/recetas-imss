@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-bs="dark">
+<html lang="es" data-bs-theme="light">
     <head>
         <title>Title</title>
         <!-- Required meta tags -->
@@ -14,7 +14,7 @@
         <header></header>
         <main>
             
-            <h1 class="titulo">¡Bienvenido (Nombre del doctor)!</h1>
+            <h1 class="titulo" id="titulo-doctor"></h1>
             <div class="buscarPaciente">
                 <form action="" class="mx-5">
                 <div class="mb-4 d-flex justify-content-center"><input type="text" class="form-control form-control-lg" name="Curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" placeholder="Ingrese la CURP del paciente" maxlength="18" required>
@@ -109,6 +109,6 @@
 
         <script src="js/mostrarPaciente.js"></script>
 
-        <script src="js/addOpcionesMedicamento.js"></script>
+        <script src="js/doctor.js"></script>
     </body>
 </html>

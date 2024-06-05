@@ -35,7 +35,22 @@ A AÑADIR A LA BASE DE DATOS
 <option value="cetirizina">Cetirizina</option>
 */
 
-const medicamentos = document.getElementById("medicamentos")
+async function getCurrentUser() {
+    let res = await fetch("api/usuarios/current/", {
+        method: "GET",
+        headers: { 
+            "Content-Type": "application/json",
+        }
+    })
+
+    return await res.json()
+}
+
+async function setName() {
+    let user = await getCurrentUser()
+    let message = "¡Bienvenido, " + await user.name + "!"
+    document.getElementById("titulo-doctor").innerHTML = message
+}
 
 async function getMedicineFromDb() {
     let res = await fetch("api/medicinas/", {
@@ -45,18 +60,11 @@ async function getMedicineFromDb() {
         },
     })
 
-    if (res.status === 200) {
-        console.log("OKOKOKOKO")
-        return res.json()
-    }
-
-    console.log("NOMAMES ALGO SALIÓ MAL")
-    return res.json()
+    return await res.json()
 }
 
 async function addOptions() {
     medicineList = await getMedicineFromDb()
-    console.log(medicineList)
     let options = ""
     let medicamentosHtml = ""
     medicineList.forEach(m => {
@@ -76,7 +84,12 @@ async function addOptions() {
         </div>
         `
     }
-    medicamentos.innerHTML = medicamentosHtml
+    document.getElementById("medicamentos").innerHTML = medicamentosHtml
 }
 
-window.onload = addOptions()
+function setUi() {
+    setName()
+    addOptions()
+}
+
+window.onload = setUi()
