@@ -22,6 +22,7 @@ const returnPres = (res, pres) => {
         patient: pres.patient,
         domicile: pres.domicile,
         medicine: pres.medicine,
+        quantity: pres.quantity,
         state: pres.state
     })
 }
@@ -90,9 +91,9 @@ const addPres = asyncHandler( async (req, res) => {
         throw new Error("Sólo los médicos pueden hacer recetas")
     }
 
-    let { patient, domicile, medicine } = req.body
+    let { patient, domicile, medicine, quantity } = req.body
     
-    if (!patient || !domicile || !medicine) {
+    if (!patient || !domicile || !medicine || !quantity) {
         res.status(400)
         throw new Error("Se necesitan los campos: patient, domicile, medicine")
     }
@@ -102,6 +103,7 @@ const addPres = asyncHandler( async (req, res) => {
         patient,
         domicile,
         medicine,
+        quantity,
         state: constants.REQUESTED
     })
 

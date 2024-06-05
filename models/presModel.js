@@ -24,14 +24,25 @@ const prescriptionSchema = mongoose.Schema(
                 "Es necesario saber dónde se entregará la receta"
             ]
         },
-        medicine: [{
-            type: mongoose.Schema.Types.ObjectId,
-            required: [
-                true,
-                "Es necesario saber los medicamentos que contiene la receta"
-            ],
-            ref: "Medicine"
-        }],
+        medicine: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                required: [
+                    true,
+                    "Es necesario saber los medicamentos que contiene la receta"
+                ],
+                ref: "Medicine"
+            },
+        ],
+        quantity: [
+            {
+                type: Number,
+                required: [
+                    true,
+                    "Se necesita saber la cantidad de este medicamento"
+                ]
+            }
+        ],
         state: {
             // Es importante usar las constantes para evitar confusiones
             type: String,

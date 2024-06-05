@@ -29,7 +29,7 @@ const changeAttrName = (oldName, newName, obj) => {
 const getAllMedicine = asyncHandler( async (req, res) => {
     let medicine = await Med.find()
 
-    medicine = changeAttrName("id", "_id", medicine)
+    medicine = changeAttrName("_id", "id", medicine)
 
     res.status(200).json(medicine)
 })
