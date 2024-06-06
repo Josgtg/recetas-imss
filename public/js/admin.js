@@ -45,6 +45,7 @@ async function loadRecetas() {
                             <p class="card-text">Medicina: ${receta.medicine}</p>
                             <p class="card-text">Cantidad: ${receta.quantity}</p>
                             <p class="card-text">Estado de la receta: ${receta.state}</p>
+                            <button class="btn btn-danger" onclick="eliminarReceta('${receta.patient}')">Eliminar receta</button>
                         </div>
                     </div>`;
                 content.appendChild(recetaDiv);
@@ -67,6 +68,7 @@ async function loadMedicinas() {
                             <h5 class="card-title">${medicina.name}</h5>
                             <p class="card-text">Clave: ${medicina.clave}</p>
                             <p class="card-text">Descripción: ${medicina.description}</p>
+                            <button class="btn btn-danger" onclick="eliminarMedicina('${medicina.clave}')">Eliminar medicina</button>
                         </div>
                     </div>`;
                 content.appendChild(medicinaDiv);
@@ -85,6 +87,38 @@ async function eliminarUsuario(curp) {
                 loadUsuarios();
             } else {
                 alert('Error al eliminar el usuario');
+            }
+        });
+    }
+}
+
+async function eliminarReceta(receta) {
+    if (confirm("¿Está seguro de que desea eliminar esta receta?")) {
+        fetch(`/api/recetas/${receta}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Receta eliminado exitosamente');
+                loadRecetas();
+            } else {
+                alert('Error al eliminar receta');
+            }
+        });
+    }
+}
+
+async function eliminarMedicina(medicina) {
+    if (confirm("¿Está seguro de que desea eliminar esta medicina?")) {
+        fetch(`/api/medicinas/${medicina}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Medicina eliminada exitosamente');
+                loadMedicinas();
+            } else {
+                alert('Error al eliminar medicina');
             }
         });
     }
