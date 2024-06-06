@@ -103,6 +103,12 @@ async function descargar(id) {
         counter++
     })
 
+    if (pres.state == "surtida") {
+        let b = document.getElementById(id)
+        b.innerHTML = "Surtida"
+        b.disabled = "true"
+    }
+
     let doc = await getUserById(pres.doctor)
     let patient = await getUserByCurp(pres.patient)
 
