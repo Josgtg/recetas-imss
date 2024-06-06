@@ -135,7 +135,7 @@ const deleteMedicine = asyncHandler( async (req, res) => {
     medicine = await Med.findByIdAndDelete(req.params.id)
 
     if (medicine) {
-        returnMedicine(res, medicine)
+        returnMed(res, medicine)
     } else {
         res.status(400)
         throw new Error("No fue posible eliminar el medicamento")
