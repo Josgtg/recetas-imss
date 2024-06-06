@@ -13,7 +13,6 @@
             <!-- place navbar here -->
         </header>
         <main>
-
             <div class="relocate">
                 <div class="container w-75 mt-5 rounded shadow colorLg ">
                     <div class="row align-items-stretch">
@@ -23,22 +22,24 @@
                             <h2 class="fw-bold text-center pt-5 py-5">¡Bienvenido!</h2>    
                             <form action="" class="md-5" id="signup-form">
                                 <div class="mb-4 d-flex justify-content-center">
-                                    <div class="d-grid">
-                                        <input placeholder="CURP" type="curp" class="form-control" name="curp" id="curp" required>
-                                        <input placeholder="Nombre" type="name" class="form-control" name="name" id="name" required>
-                                    </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16"><path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/></svg>
-                                    <div class="d-grid">
-                                        <input placeholder="Contraseña" type="password" class="form-control" name="password" id="password" required><br>
-                                        <select id="kind" name="kind">
+                                    <div class="d-grid gap-2">
+                                        <input placeholder="CURP" type="text" class="form-control mb-2" name="curp" id="curp" required>
+                                        <input placeholder="Nombre" type="text" class="form-control mb-2" name="name" id="name" required>
+                                        <div class="input-group mb-2">
+                                            <input placeholder="Contraseña" type="password" class="form-control" name="password" id="password" required>
+                                            <span class="input-group-text">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
+                                                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <select id="kind" name="kind" class="form-select mb-2">
                                             <option value="admin">Admin</option>
                                             <option value="doctor">Doctor</option>
                                             <option value="paciente" selected="true">Paciente</option>
                                         </select>
+                                        <button type="submit" class="btn btn-primary">Registrarse</button>
                                     </div>
-                                </div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Registrarse</button>
                                 </div>
                             </form>
                             <script src="js/signup.js"></script>
