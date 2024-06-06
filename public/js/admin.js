@@ -19,7 +19,7 @@ async function loadUsuarios() {
                             <h5 class="card-title">${usuario.name}</h5>
                             <p class="card-text">CURP: ${usuario.curp}</p>
                             <p class="card-text">ROL: ${usuario.kind}</p>
-                            <button class="btn btn-danger" onclick="eliminarUsuario('${usuario.curp}')">Eliminar Usuario</button>
+                            <button class="btn btn-danger" onclick="eliminarUsuario('${usuario.id}')">Eliminar Usuario</button>
                         </div>
                     </div>`;
                 content.appendChild(userDiv);
@@ -45,7 +45,7 @@ async function loadRecetas() {
                             <p class="card-text">Medicina: ${receta.medicine}</p>
                             <p class="card-text">Cantidad: ${receta.quantity}</p>
                             <p class="card-text">Estado de la receta: ${receta.state}</p>
-                            <button class="btn btn-danger" onclick="eliminarReceta('${receta.patient}')">Eliminar receta</button>
+                            <button class="btn btn-danger" onclick="eliminarReceta('${receta.id}')">Eliminar receta</button>
                         </div>
                     </div>`;
                 content.appendChild(recetaDiv);
@@ -68,7 +68,7 @@ async function loadMedicinas() {
                             <h5 class="card-title">${medicina.name}</h5>
                             <p class="card-text">Clave: ${medicina.clave}</p>
                             <p class="card-text">Descripción: ${medicina.description}</p>
-                            <button class="btn btn-danger" onclick="eliminarMedicina('${medicina.clave}')">Eliminar medicina</button>
+                            <button class="btn btn-danger" onclick="eliminarMedicina('${medicina.id}')">Eliminar medicina</button>
                         </div>
                     </div>`;
                 content.appendChild(medicinaDiv);
