@@ -149,9 +149,9 @@ async function createTable() {
     let counter = 0
     recetas.forEach(r => {
         if (r.state == "surtida") {
-            let button = `<button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')">Marcar como surtida</button>`
+            var button = `<button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')">Marcar como surtida</button>`
         } else {
-            let button = `<button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')" disabled>Surtida</button>`
+            var button = `<button type="button" disabled>Surtida</button>`
         }
         counter++ 
         tableBody += `
@@ -160,7 +160,7 @@ async function createTable() {
             <td>Receta ${counter}</td>
             <td>${r.state}</td>
             <td>
-                <button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')">Marcar como surtida</button>
+                ${button}
                 <button type="button" onclick="descargar('${r.id}')">Crear archivo</button>
                 <a href="" id="download${r.id}" style="display: none;">Descarga tu receta</a>
             </td>
