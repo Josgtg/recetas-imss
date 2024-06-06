@@ -4,6 +4,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('medicinas-btn').addEventListener('click', loadMedicinas);
 });
 
+async function getUserById(id) {
+    let res = await fetch("api/usuarios/" + id, {
+        method: "GET",
+        headers: { 
+            "Content-Type": "application/json",
+        }
+    })
+
+    if (res.status === 200) {
+        return res.json()
+    }
+
+    return
+}
+
+async function getMedById(id) {
+    let res = await fetch("api/medicinas/" + id, {
+        method: "GET",
+        headers: { 
+            "Content-Type": "application/json",
+        }
+    })
+
+    if (res.status === 200) {
+        return res.json()
+    }
+
+    return
+}
+
 async function loadUsuarios() {
     fetch('/api/usuarios')
         .then(response => response.json())
@@ -27,23 +57,44 @@ async function loadUsuarios() {
         });
 }
 
+
+async function createMedicineList(ids) {
+    let medList = []
+    for (let id of ids) {
+        let med = await getMedById(id)
+        medList.push(med.name)
+    }
+    return medList
+}
+
+
 async function loadRecetas() {
     fetch('/api/recetas')
         .then(response => response.json())
         .then(data => {
             const content = document.getElementById('content');
             content.innerHTML = '<h2>Lista de Recetas</h2>';
-            data.forEach(receta => {
+            data.forEach(async (receta) => {
+                let counter = 0
+                let medicinas = ""
+                let doctor = await getUserById(receta.doctor)
+                let medicinasList = await createMedicineList(receta.medicine)
+
+                medicinasList.forEach(m => {
+                    medicinas += receta.quantity[counter] + " "
+                    medicinas += m + ", "
+                    counter++
+                })
+
                 const recetaDiv = document.createElement('div');
                 recetaDiv.className = 'col-12 mb-2';
                 recetaDiv.innerHTML = `
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Receta de ${receta.patient}</h5>
-                            <p class="card-text">Medico al que pertenece la receta: ${receta.doctor}</p>
+                            <p class="card-text">Medico al que pertenece la receta: ${doctor.name}</p>
                             <p class="card-text">Residencia del paciente: ${receta.residence}</p>
-                            <p class="card-text">Medicina: ${receta.medicine}</p>
-                            <p class="card-text">Cantidad: ${receta.quantity}</p>
+                            <p class="card-text">Medicina: ${medicinas}</p>
                             <p class="card-text">Estado de la receta: ${receta.state}</p>
                             <button class="btn btn-danger" onclick="eliminarReceta('${receta.id}')">Eliminar receta</button>
                         </div>
