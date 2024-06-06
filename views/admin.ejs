@@ -5,14 +5,24 @@
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
     </head>
 
     <body>
         <header></header>
         <main>
-            <h1>SOY ADMIN</h1>
+            <div class="container mt-5">
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <button id="usuarios-btn" class="btn btn-primary">Usuarios</button>
+                        <button id="recetas-btn" class="btn btn-primary">Recetas</button>
+                        <button id="medicinas-btn" class="btn btn-primary">Medicinas</button>
+                    </div>
+                </div>
+                <div id="content" class="row">
+                    
+                </div>
+            </div>
         </main>
         <footer class="bg-primary mt-5 py-4 text-center text-white fixed-bottom"></footer>
 
@@ -21,5 +31,6 @@
         ></script>
 
         <script src="js/script.js"></script>
+        <script src="js/admin.js"></script>
     </body>
 </html>
