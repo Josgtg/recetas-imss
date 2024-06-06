@@ -49,6 +49,8 @@ o
 Si el comando se ha ejecutado de forma exitosa, podrás ver la aplicación en ejecución en la dirección<br>htt<span>p://localhost:</span>*El puerto que escribiste en tu archivo.env*<br>
 *htt<span>p://localhost:</span>9030, por ejemplo.*
 
+También está disponible en http://idawis-uaz.ddns.net:9030
+
 # Uso de la API
 
 Todas las peticiones y respuestas se manejan en formato JSON.
