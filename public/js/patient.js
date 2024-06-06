@@ -103,18 +103,12 @@ async function descargar(id) {
         counter++
     })
 
-    if (pres.state == "surtida") {
-        let b = document.getElementById(id)
-        b.innerHTML = "Surtida"
-        b.disabled = "true"
-    }
-
     let doc = await getUserById(pres.doctor)
     let patient = await getUserByCurp(pres.patient)
 
     let text = `Doctor: ${doc.name}\nPaciente: ${patient.name}\nDomicilio: ${pres.residence}\nMedicinas: ${medicinas}\nEstado: ${pres.state}`
 
-    let download = document.getElementById("presDownload")
+    let download = document.getElementById("download" + pres.id)
     download.style = "display: inherit;"
     let name = "Receta.txt"
     let file = new Blob([text], {type: "text/plain"})
@@ -154,6 +148,11 @@ async function createTable() {
     let tableBody = ""
     let counter = 0
     recetas.forEach(r => {
+        if (r.state == "surtida") {
+            let button = `<button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')">Marcar como surtida</button>`
+        } else {
+            let button = `<button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')" disabled>Surtida</button>`
+        }
         counter++ 
         tableBody += `
         <tr class="table-light">
@@ -163,7 +162,7 @@ async function createTable() {
             <td>
                 <button type="button" id="${r.id}" onclick="marcarSurtida('${r.id}')">Marcar como surtida</button>
                 <button type="button" onclick="descargar('${r.id}')">Crear archivo</button>
-                <a href="" id="presDownload" style="display: none;">Descarga tu receta</a>
+                <a href="" id="download${r.id}" style="display: none;">Descarga tu receta</a>
             </td>
         </tr>
         `
