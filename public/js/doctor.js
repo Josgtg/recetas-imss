@@ -48,6 +48,7 @@ async function addOptions() {
         `
     }
     medicamentosHtml += `
+        <br><br>
         <div class="d-grid">
             <button type="submit" class="btn btn-lg btn-info">Solicitar</button>
         </div>
