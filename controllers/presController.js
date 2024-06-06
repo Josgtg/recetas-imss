@@ -20,7 +20,7 @@ const returnPres = (res, pres) => {
         id: pres._id,
         doctor: pres.doctor,
         patient: pres.patient,
-        domicile: pres.domicile,
+        residence: pres.residence,
         medicine: pres.medicine,
         quantity: pres.quantity,
         state: pres.state
@@ -91,17 +91,17 @@ const addPres = asyncHandler( async (req, res) => {
         throw new Error("Sólo los médicos pueden hacer recetas")
     }
 
-    let { patient, domicile, medicine, quantity } = req.body
+    let { patient, residence, medicine, quantity } = req.body
     
-    if (!patient || !domicile || !medicine || !quantity) {
+    if (!patient || !residence || !medicine || !quantity) {
         res.status(400)
-        throw new Error("Se necesitan los campos: patient, domicile, medicine")
+        throw new Error("Se necesitan los campos: patient, residence, medicine, quantity")
     }
     
     let pres = await Pres.create({
         doctor: req.session.user_id,
         patient,
-        domicile,
+        residence,
         medicine,
         quantity,
         state: constants.REQUESTED
@@ -125,11 +125,11 @@ const updatePres = asyncHandler( async (req, res) => {
         throw new Error("Sólo los médicos pueden modificar recetas")
     }
 
-    let { patient, domicile, medicine } = req.body
+    let { patient, residence, medicine, quantity } = req.body
 
-    if (!patient || !domicile || !medicine) {
+    if (!patient || !residence || !medicine || !quantity) {
         res.status(400)
-        throw new Error("Se necesitan los campos: patient, domicile, medicine")
+        throw new Error("Se necesitan los campos: patient, residence, medicine, quantity")
     }
 
     let pres = await Pres.findById(req.params.id)
@@ -172,10 +172,10 @@ const changeStatus = asyncHandler( async (req, res) => {
     }
 
     if (
-        state == constants.REQUESTED ||
-        state == constants.PROCESSING ||
-        state == constants.SENT ||
-        state == constants.DELIVERED
+        state != constants.REQUESTED &&
+        state != constants.PROCESSING &&
+        state != constants.SENT &&
+        state != constants.DELIVERED
     ) {
         res.status(400)
         throw new Error("El estado de la receta está en un formato inválido")

@@ -16,36 +16,38 @@
             
             <h1 class="titulo" id="titulo-doctor"></h1>
             <div class="buscarPaciente">
-                <form action="" class="mx-5">
-                <div class="mb-4 d-flex justify-content-center"><input type="text" class="form-control form-control-lg" name="Curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" placeholder="Ingrese la CURP del paciente" maxlength="18" required>
-                </div>
-                <div class="d-grid">
-                    <button type="button" class="btn btn-success" onclick="mostrar()">Buscar</button>
-                </div>
+                <form action="" class="mx-5" id="patient">
+                    <div class="mb-4 d-flex justify-content-center"><input type="text" class="form-control form-control-lg" id="curp" name="curp" pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" placeholder="Ingrese la CURP del paciente" maxlength="18" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">Buscar</button>
+                    </div>
                 </form>
-            </div><br><br>
+            </div>
+            <br><br>
 
 
             <div class="paciente" id="paciente">
-                <h2 class="titulo">(NOMBRE DEL PACIENTE)</h2><br>
+            <form action="" id="medicamentos-form">
+                <h2 class="titulo" id="patient-name">(NOMBRE DEL PACIENTE)</h2><br>
                 <h4>Dirección de entrega</h4>
                 <div class="pedirDatosPaciente">
 
                 <div class="entradaDatos">
                     <label class="form-label mt-4">Calle y numero:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="calleYNum">
                 </div>
                 <div class="entradaDatos">
                     <label class="form-label mt-4">Colonia:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="colonia">
                 </div>
                 <div class="entradaDatos">
                     <label class="form-label mt-4">Ciudad:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="ciudad">
                 </div>
                 <div class="entradaDatos">
                     <label class="form-label mt-4">Estado:</label>
-                    <select class="form-select">
+                    <select class="form-select" name="estado">
                         <option value="no">Seleccione uno...</option>
                         <option value="AS">Aguascalientes</option>
                         <option value="BC">Baja California</option>
@@ -83,18 +85,17 @@
                 </div>
                 <div class="entradaDatos">
                     <label class="form-label mt-4">Codigo Postal:</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="cp">
                 </div>
             </div>
             <br><br>
             <h4>Captura recetas</h4>
             <div id="medicamentos">
-
+                
             </div>
+        </form>
             <br><br>
-            <div class="d-grid">
-                <button type="button" class="btn btn-lg btn-info" onclick="exitoso()">Solicitar</button>
-            </div>
+            
             </div>
             
             
@@ -104,6 +105,8 @@
         <script
             src="js/bootstrap.bundle.min.js"
         ></script>
+
+        <script src="js/subirReceta.js"></script>
 
         <script src="js/script.js"></script>
 

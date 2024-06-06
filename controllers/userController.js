@@ -105,6 +105,15 @@ const registerUser = asyncHandler( async (req, res) => {
         throw new Error("Se necesitan los campos: curp, password, name, kind")
     }
 
+    if (
+        kind != constants.ADMIN &&
+        kind != constants.MEDIC &&
+        kind != constants.PATIENT
+    ) {
+        res.status(400)
+        throw new Error("El tipo de usuario está en un formato inválido")
+    }
+
     if (await User.findOne({ curp })) {
         res.status(400)
         throw new Error("Ya hay un usuario registrado con esa CURP")
