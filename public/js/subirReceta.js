@@ -6,8 +6,7 @@ function getFormData() {
 
 async function fixFormat() {
     let data = getFormData()
-    let residence = `${data.calleYNum}, ${data.colonia}, ${data.ciudad}, ${data.estado}, ${data.cp}
-    `
+    let residence = `${data.calleYNum}, ${data.colonia}, ${data.ciudad}, ${data.estado}, ${data.cp}`
     let curp = document.getElementById("curp").value
 
     let medicine = []
