@@ -25,7 +25,7 @@ app.use(express.static(__dirname + "/node_modules/bootstrap/dist"))
 app.use(session({
     name: "imssSessionId",
     secret: process.env.SECRET,
-    cookie: { _expires: (5 * 60 * 1000) }, // 5 Minutos
+    cookie: { _expires: (2 * 60 * 60 * 1000) }, // 2 horas
     resave: false,
     saveUninitialized: false
 }))
