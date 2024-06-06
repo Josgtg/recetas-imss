@@ -7,107 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/usuario_style.css">
+        <link rel="stylesheet" href="css/usuario_style.css"/>
     </head>
 
     <body>
         <header></header>
         <main>
-            <h1 class="titulo">(Nombre del paciente)</h1>
-            <div class="tablaMedicina">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="table-primary">
-                            <th scope="row">Numero</th>
-                            <td>Nombre de la medicina</td>
-                            <td>Cantidad</td>
-                            <td>Status</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-light">
-                            <th scope="row">1</th>
-                            <td>Medicina 1</td>
-                            <td>Cantidad</td>
-                            <td id="medicina1">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina1')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">2</th>
-                            <td>Medicina 2</td>
-                            <td>Cantidad</td>
-                            <td id="medicina2">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina2')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">3</th>
-                            <td>Medicina 3</td>
-                            <td>Cantidad</td>
-                            <td id="medicina3">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina3')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">4</th>
-                            <td>Medicina 4</td>
-                            <td>Cantidad</td>
-                            <td id="medicina4">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina4')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">5</th>
-                            <td>Medicina 5</td>
-                            <td>Cantidad</td>
-                            <td id="medicina5">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina5')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">6</th>
-                            <td>Medicina 6</td>
-                            <td>Cantidad</td>
-                            <td id="medicina6">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina6')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">7</th>
-                            <td>Medicina 7</td>
-                            <td>Cantidad</td>
-                            <td id="medicina7">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina7')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">8</th>
-                            <td>Medicina 8</td>
-                            <td>Cantidad</td>
-                            <td id="medicina8">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina8')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">9</th>
-                            <td>Medicina 9</td>
-                            <td>Cantidad</td>
-                            <td id="medicina9">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina9')">Surtido</button></td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row">10</th>
-                            <td>Medicina 10</td>
-                            <td>Cantidad</td>
-                            <td id="medicina10">En proceso...</td>
-                            <td><button type="button" onclick="actualizarStatus('medicina10')">Surtido</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h1 class="titulo" id="patient-name"></h1>
+            <div class="tablaMedicina" id="tabla-medicina">
+                
             </div>
         </main>
         <footer class="bg-primary mt-5 py-4 text-center text-white fixed-bottom"></footer>
         
-        <script
-            src="js/bootstrap.bundle.min.js"
-        ></script>
+        <script src="js/patient.js"></script>
+        
+        <script src="js/bootstrap.bundle.min.js"></script>
 
         <script src="js/script.js"></script>
-
-        <script src="js/pacienteSurtido.js"></script>
     </body>
 </html>

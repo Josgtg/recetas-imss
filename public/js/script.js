@@ -22,5 +22,5 @@ header.innerHTML = `
 `;
 
 footer.innerHTML = `
-    <small>universidad autonoma de zacatecas</small>
+    <small>Universidad Autonoma de Zacatecas</small>
 `;

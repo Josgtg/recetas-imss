@@ -62,8 +62,6 @@ const getAllUsers = asyncHandler( async (req, res) => {
 
 // GET /:id
 const getOneUser = asyncHandler( async (req, res) => {
-    ifPatientCheckSameId(req)
-
     try {
         // User.findOne(filtro, selección)
         var user = await User.findOne({ _id: req.params.id }, { password: 0 })
@@ -82,8 +80,6 @@ const getOneUser = asyncHandler( async (req, res) => {
 
 // GET /curp/:curp
 const getUserByCurp = asyncHandler( async (req, res) => {
-    ifPatientCheckSameId(req)
-
     let user = await User.findOne({ curp: req.params.curp }, { password: 0 })
 
     if (!user) {
@@ -169,7 +165,7 @@ const getCurrentUser = asyncHandler( async (req, res) => {
 
 // DELETE /:id
 const deleteUser = asyncHandler( async (req, res) => {
-    if (req.session.id != req.params.id || req.session.kind != constants.ADMIN) {
+    if (req.session.id != req.params.id && req.session.kind != constants.ADMIN) {
         res.status(403)
         throw new Error("No tienes acceso a este método")
     }
