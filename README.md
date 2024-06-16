@@ -11,25 +11,15 @@ Este es el proyecto final de la materia _Introducción al Desarrollo de Aplicaci
 
 Necesitarás tener la herramienta Git en tu computadora para seguir este proceso. La puedes descargar en https://git-scm.com
 
-1. Iniciar un repositorio de git vacío en una carpeta nueva donde se vaya a guardar el proyecto.
+1. Para descargar el repositorio:
 
-`git init`
+`git clone https://github.com/Josgtg/recetas_imss`
 
-`git branch -M main`
-
-2. Para vincular con el repositorio local:
-
-`git remote add origin https://github.com/Josgtg/recetas_imss`
-
-3. Para descargar los archivos del repositorio:
-
-`git pull origin main`
-
-4. Ya debes ser capaz de instalar las dependencias necesarias:
+2. Ya debes ser capaz de instalar las dependencias necesarias con npm:
 
 `npm install`
 
-5. Necesitas crear un archivo con el nombre _.env (Importante notar que es sólo la extensión, sin nombre de archivo)_ dentro de la carpeta principal. Dentro de este archivo debe venir la siguiente estructura:
+3. Necesitas crear un archivo con el nombre _.env (Importante notar que es sólo la extensión, sin nombre de archivo)_ dentro de la carpeta principal. Dentro de este archivo debe venir la siguiente estructura:
 
 PORT = _Número de puerto al que va a escuchar la aplicación_
 
@@ -37,7 +27,7 @@ CONNECTION_STRING = _Link a tu base de datos de MongoDB (Entre comillas)_
 
 SECRET = _Palabra o frase de tu preferencia. Es una clave necesaria para la funcionalidad de las cookies (Entre comillas)_
 
-6. Habiendo hecho lo anterior, deberías poder iniciar la aplicación:
+4. Habiendo hecho lo anterior, deberías poder iniciar la aplicación:
 
 `npm run dev` - Para usar nodemon
 
